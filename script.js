@@ -88,7 +88,7 @@ brandLink.addEventListener("click", (event) => {
     brandClickTimes.length >= 6 &&
     brandClickTimes[brandClickTimes.length - 1] - brandClickTimes[brandClickTimes.length - 6] <= 3000;
 
-  const selectedAudio = secretComboTriggered || Math.floor(Math.random() * 5) === 0 ? arbysRareAudio : arbysAudio;
+  const selectedAudio = secretComboTriggered || Math.floor(Math.random() * 3) === 0 ? arbysRareAudio : arbysAudio;
   const otherAudio = selectedAudio === arbysAudio ? arbysRareAudio : arbysAudio;
 
   if (secretComboTriggered) {
