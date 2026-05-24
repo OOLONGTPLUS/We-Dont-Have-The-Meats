@@ -76,29 +76,13 @@ const featuredItems = [
 ];
 
 let currentFeaturedIndex = 0;
-let brandClickTimes = [];
 
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
-  const now = Date.now();
-  brandClickTimes = brandClickTimes.filter((time) => now - time <= 3000);
-  brandClickTimes.push(now);
-
-  const secretComboTriggered =
-    brandClickTimes.length >= 6 &&
-    brandClickTimes[brandClickTimes.length - 1] - brandClickTimes[brandClickTimes.length - 6] <= 3000;
-
-  const selectedAudio = secretComboTriggered || Math.floor(Math.random() * 3) === 0 ? arbysRareAudio : arbysAudio;
-  const otherAudio = selectedAudio === arbysAudio ? arbysRareAudio : arbysAudio;
-
-  if (secretComboTriggered) {
-    brandClickTimes = [];
-  }
-
-  otherAudio.pause();
-  otherAudio.currentTime = 0;
-  selectedAudio.currentTime = 0;
-  selectedAudio.play();
+  arbysRareAudio.pause();
+  arbysRareAudio.currentTime = 0;
+  arbysAudio.currentTime = 0;
+  arbysAudio.play();
 });
 
 surpriseButton.addEventListener("click", () => {
