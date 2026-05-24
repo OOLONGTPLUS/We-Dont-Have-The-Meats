@@ -8,6 +8,7 @@ const rotatorDots = document.getElementById("rotatorDots");
 const brandLink = document.querySelector(".brand-link");
 const arbysAudio = document.getElementById("arbysAudio");
 const arbysRareAudio = document.getElementById("arbysRareAudio");
+const addCodeButton = document.getElementById("addCodeButton");
 
 const surpriseMenuItems = [
   {
@@ -83,6 +84,10 @@ brandLink.addEventListener("click", (event) => {
   arbysRareAudio.currentTime = 0;
   arbysAudio.currentTime = 0;
   arbysAudio.play();
+});
+
+addCodeButton.addEventListener("click", () => {
+  window.prompt("Search for a code:", "");
 });
 
 surpriseButton.addEventListener("click", () => {
