@@ -7,6 +7,7 @@ const heroRotatorCard = document.querySelector(".rotator-card");
 const rotatorDots = document.getElementById("rotatorDots");
 const brandLink = document.querySelector(".brand-link");
 const arbysAudio = document.getElementById("arbysAudio");
+const arbysRareAudio = document.getElementById("arbysRareAudio");
 
 const surpriseMenuItems = [
   {
@@ -44,6 +45,10 @@ const surpriseMenuItems = [
   {
     name: "Honest Kids Organic Apple Juice Drink",
     url: "https://www.arbys.com/menu/categories/kids-menu/honest-kids-organic-apple-juice-drink/"
+  },
+  {
+    name: "Bottled Water",
+    url: "https://www.arbys.com/menu/categories/beverages/bottled-water/"
   }
 ];
 
@@ -74,8 +79,13 @@ let currentFeaturedIndex = 0;
 
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
-  arbysAudio.currentTime = 0;
-  arbysAudio.play();
+  const selectedAudio = Math.floor(Math.random() * 8) === 0 ? arbysRareAudio : arbysAudio;
+  const otherAudio = selectedAudio === arbysAudio ? arbysRareAudio : arbysAudio;
+
+  otherAudio.pause();
+  otherAudio.currentTime = 0;
+  selectedAudio.currentTime = 0;
+  selectedAudio.play();
 });
 
 surpriseButton.addEventListener("click", () => {
