@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arby's Fan Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <nav class="topbar">
+      <a class="brand-link" href="#top" aria-label="Play Arby's audio">
+        <img
+          class="brand-logo"
+          src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Arby%27s_logo.svg"
+          alt="Arby's logo"
+        >
+      </a>
+      <audio id="arbysAudio" preload="auto" src="arbys-we-have-the-meats_a13EQ8M.mp3"></audio>
+      <button id="themeButton" class="theme-button" type="button">Switch Vibe</button>
+    </nav>
+
+    <section id="top" class="hero-content reveal visible">
+      <div class="hero-copy-block">
+        <p class="eyebrow">Bold sandwiches. Big energy.</p>
+        <h1>
+          <span class="headline-prefix">We Have The</span>
+          <span class="headline-meats-lockup" aria-label="MEATS">
+            <span class="headline-meats-fill"></span>
+          </span>
+        </h1>
+        <p class="hero-copy">
+          A playful Arby's-inspired landing page with smoky colors, stacked cards,
+          and a little JavaScript flavor on top.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-button" href="https://www.arbys.com/menu/">Explore With Us</a>
+          <button id="surpriseButton" class="secondary-button" type="button">Surprise Me</button>
+        </div>
+        <p id="surpriseText" class="surprise-text">Tap the button for a roast beef mood boost.</p>
+      </div>
+
+      <aside class="hero-rotator reveal visible" aria-label="Featured Arby's items">
+        <p class="rotator-label">Now rotating</p>
+        <div class="rotator-stage">
+          <article class="rotator-card is-active">
+            <span class="rotator-type">Signature</span>
+            <h3 id="heroItemName">Classic Roast Beef</h3>
+            <p id="heroItemDescription">Thin-sliced roast beef stacked warm on a toasted sesame seed bun.</p>
+          </article>
+        </div>
+        <div class="rotator-dots" id="rotatorDots" aria-hidden="true"></div>
+      </aside>
+    </section>
+  </header>
+
+  <main>
+    <section id="menu" class="section reveal">
+      <div class="menu-heading-row reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Featured favorites</p>
+          <h2>Stacked with personality</h2>
+        </div>
+
+        <div class="title-image-strip" aria-label="Featured menu item images">
+          <figure class="title-image-card">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/A_roast_beef_sandwich_with_au_jus_sauce_for_dipping%2C_served_with_a_side_of_fries..jpg/960px-A_roast_beef_sandwich_with_au_jus_sauce_for_dipping%2C_served_with_a_side_of_fries..jpg"
+              alt="Roast beef sandwich"
+            >
+            <figcaption>Roast Beef</figcaption>
+          </figure>
+
+          <figure class="title-image-card">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Curly_Fries_Arby%27s_%2815088187957%29.jpg/250px-Curly_Fries_Arby%27s_%2815088187957%29.jpg"
+              alt="Curly fries"
+            >
+            <figcaption>Curly Fries</figcaption>
+          </figure>
+
+          <figure class="title-image-card">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/e/e1/Milkshake.jpg"
+              alt="Milkshake"
+            >
+            <figcaption>Jamocha Shake</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="card-grid">
+        <article class="menu-card reveal">
+          <span class="card-tag"><span class="card-tag-text">Classic</span></span>
+          <h3>Roast Beef</h3>
+          <p>Thin-sliced, warm, and built for people who like simple things done right.</p>
+        </article>
+
+        <article class="menu-card reveal">
+          <span class="card-tag"><span class="card-tag-text">Crunchy</span></span>
+          <h3>Curly Fries</h3>
+          <p>Seasoned spirals with enough swagger to steal the spotlight from the sandwich.</p>
+        </article>
+
+        <article class="menu-card reveal">
+          <span class="card-tag"><span class="card-tag-text">Sweet</span></span>
+          <h3>Jamocha Shake</h3>
+          <p>Cold, creamy, and ready to turn a lunch run into a full reward moment.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section spotlight reveal">
+      <div class="spotlight-panel reveal">
+        <p class="eyebrow">Why this site stands out</p>
+        <h2>HTML for structure, CSS for style, JavaScript for motion</h2>
+        <p>
+          This mini site is organized the same way you would build it in Visual Studio Code:
+          one file for content, one for styling, and one for interactivity.
+        </p>
+      </div>
+
+      <div class="stats-panel reveal">
+        <div class="stat">
+          <strong>3</strong>
+          <span>core files</span>
+        </div>
+        <div class="stat">
+          <strong>100%</strong>
+          <span>editable</span>
+        </div>
+        <div class="stat">
+          <strong>1</strong>
+          <span>fun theme switcher</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Made for an Arby's-inspired web project in Visual Studio Code.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
