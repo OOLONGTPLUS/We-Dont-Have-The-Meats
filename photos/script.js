@@ -1,3 +1,4 @@
+// 1. DOM Elements (Fixed naming conflicts)
 const surpriseButton = document.getElementById("surpriseButton");
 const surpriseText = document.getElementById("surpriseText");
 const themeButton = document.getElementById("themeButton");
@@ -6,116 +7,82 @@ const heroItemDescription = document.getElementById("heroItemDescription");
 const heroRotatorCard = document.querySelector(".rotator-card");
 const rotatorDots = document.getElementById("rotatorDots");
 const brandLink = document.querySelector(".brand-link");
-const arbysAudio = document.getElementById("arbysAudio");
-const arbysRareAudio = document.getElementById("arbysRareAudio");
-const rickrollAudio = document.getElementById("rickroll");
 const addCodeButton = document.getElementById("addCodeButton");
 const codeModal = document.getElementById("codeModal");
 const closeCodeModalButton = document.getElementById("closeCodeModalButton");
 const codeSearchInput = document.getElementById("codeSearchInput");
 const codeModalStatus = document.getElementById("codeModalStatus");
 
+// HTML Audio Elements
+const arbysAudio = document.getElementById("arbysAudio");
+const arbysRareAudio = document.getElementById("arbysRareAudio");
+const rickrollAudio = document.getElementById("rickroll");
+
+// 2. Separate Secret Code Phrases
 const arbySecretPhrases = new Set(["let's get married", "lets get married"]);
 const rickrollPhrases = new Set(["give up"]);
-const rareAudioFileName = "lets-get-married.mp3";
-const arbysRareAudio = new Audio(rareAudioFileName);
-const rickrollAudioFileName = "rickroll.mp3";
-const rickrollAudio = new Audio(rickrollAudioFileName)
 
-const surpriseMenuItems = [
-  {
-    name: "Jamocha Shake",
-    url: "https://www.arbys.com/menu/categories/desserts/jamocha-shake/"
-  },
-  {
-    name: "Strawberry Lemonade",
-    url: "https://www.arbys.com/menu/categories/beverages/strawberry-lemonade/"
-  },
-  {
-    name: "Peach Cobbler Roll 2PC",
-    url: "https://www.arbys.com/menu/categories/desserts/peach-cobbler-roll-2pc/"
-  },
-  {
-    name: "Double Big Cheesy Bacon Burger",
-    url: "https://www.arbys.com/menu/categories/burgers/double-big-cheesy-bacon-burger/"
-  },
-  {
-    name: "Half Pound Beef 'N Cheddar Meal",
-    url: "https://www.arbys.com/menu/categories/meals/half-pound-beef-n-cheddar-meal/"
-  },
-  {
-    name: "Double Roast Beef Meal",
-    url: "https://www.arbys.com/menu/categories/meals/double-roast-beef-meal/"
-  },
-  {
-    name: "Classic French Dip & Swiss Meal",
-    url: "https://www.arbys.com/menu/categories/meals/classic-french-dip-swiss-meal/"
-  },
-  {
-    name: "White Cheddar Mac 'N Cheese",
-    url: "https://www.arbys.com/menu/categories/limited-time/white-cheddar-mac-n-cheese/"
-  },
-  {
-    name: "Honest Kids Organic Apple Juice Drink",
-    url: "https://www.arbys.com/menu/categories/kids-menu/honest-kids-organic-apple-juice-drink/"
-  },
-  {
-    name: "Bottled Water",
-    url: "https://www.arbys.com/menu/categories/beverages/bottled-water/"
-  }
-];
-
-const featuredItems = [
-  {
-    type: "Signature",
-    name: "Classic Roast Beef",
-    description: "Thin-sliced roast beef stacked warm on a toasted sesame seed bun."
-  },
-  {
-    type: "Crispy",
-    name: "Curly Fries",
-    description: "Seasoned spirals with crunch, swagger, and serious snack energy."
-  },
-  {
-    type: "Smokehouse",
-    name: "Beef 'N Cheddar",
-    description: "Roast beef, cheddar sauce, and tangy red ranch on an onion roll."
-  },
-  {
-    type: "Sweet",
-    name: "Jamocha Shake",
-    description: "A creamy coffee-and-chocolate finish when the meal deserves dessert."
-  }
-];
-
+// 3. App State
 let currentFeaturedIndex = 0;
 let secretAudioArmed = false;
 let otherSecretAudioArmed = false;
 
-arbysRareAudio.preload = "auto";
-arbysRareAudioElement.removeAttribute("src");
-rickrollAudio.preload  ="auto";
+// Ensure preloading is active
+if (arbysRareAudio) arbysRareAudio.preload = "auto";
+if (rickrollAudio) rickrollAudio.preload = "auto";
 
+// Data Arrays
+const surpriseMenuItems = [
+  { name: "Jamocha Shake", url: "https://www.arbys.com/menu/categories/desserts/jamocha-shake/" },
+  { name: "Strawberry Lemonade", url: "https://www.arbys.com/menu/categories/beverages/strawberry-lemonade/" },
+  { name: "Peach Cobbler Roll 2PC", url: "https://www.arbys.com/menu/categories/desserts/peach-cobbler-roll-2pc/" },
+  { name: "Double Big Cheesy Bacon Burger", url: "https://www.arbys.com/menu/categories/burgers/double-big-cheesy-bacon-burger/" },
+  { name: "Half Pound Beef 'N Cheddar Meal", url: "https://www.arbys.com/menu/categories/meals/half-pound-beef-n-cheddar-meal/" },
+  { name: "Double Roast Beef Meal", url: "https://www.arbys.com/menu/categories/meals/double-roast-beef-meal/" },
+  { name: "Classic French Dip & Swiss Meal", url: "https://www.arbys.com/menu/categories/meals/classic-french-dip-swiss-meal/" },
+  { name: "White Cheddar Mac 'N Cheese", url: "https://www.arbys.com/menu/categories/limited-time/white-cheddar-mac-n-cheese/" },
+  { name: "Honest Kids Organic Apple Juice Drink", url: "https://www.arbys.com/menu/categories/kids-menu/honest-kids-organic-apple-juice-drink/" },
+  { name: "Bottled Water", url: "https://www.arbys.com/menu/categories/beverages/bottled-water/" }
+];
+
+const featuredItems = [
+  { type: "Signature", name: "Classic Roast Beef", description: "Thin-sliced roast beef stacked warm on a toasted sesame seed bun." },
+  { type: "Crispy", name: "Curly Fries", description: "Seasoned spirals with crunch, swagger, and serious snack energy." },
+  { type: "Smokehouse", name: "Beef 'N Cheddar", description: "Roast beef, cheddar sauce, and tangy red ranch on an onion roll." },
+  { type: "Sweet", name: "Jamocha Shake", description: "A creamy coffee-and-chocolate finish when the meal deserves dessert." }
+];
+
+// 4. Logo Click Handler (Determines which SINGLE track plays)
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
-  let trackToPlay = arbysAudio;
+
+  let trackToPlay = arbysAudio; // Default fallback
+
   if (secretAudioArmed) {
     trackToPlay = arbysRareAudio;
-  } 
-  else if (otherSecretAudioArmed) {
+  } else if (otherSecretAudioArmed) {
     trackToPlay = rickrollAudio;
   }
 
+  // Stop all sounds before playing the new one
   [arbysAudio, arbysRareAudio, rickrollAudio].forEach(audio => {
-    audio.pause();
-    audio.currentTime = 0;
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
   });
 
-  trackToPlay.play();
+  // Play selected sound
+  if (trackToPlay) {
+    trackToPlay.play().catch(err => console.log("Playback blocked or failed:", err));
+  }
+
+  // Reset armed states
   secretAudioArmed = false;
   otherSecretAudioArmed = false;
 });
 
+// 5. Code Input Modal Handlers
 addCodeButton.addEventListener("click", () => {
   codeModal.hidden = false;
   codeSearchInput.value = "";
@@ -130,55 +97,25 @@ closeCodeModalButton.addEventListener("click", () => {
 codeSearchInput.addEventListener("keydown", (event) => {
   if (event.key !== "Enter") return;
 
-  const normalizedValue = codeSearchInput.value.trim().toLowerCase().replace(/[’‘]/g, "'");
-  console.log("Typed code:", normalizedValue); // Debug Log
+  const normalizedValue = codeSearchInput.value
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g, "'");
 
   if (arbySecretPhrases.has(normalizedValue)) {
     secretAudioArmed = true;
-    console.log("Arby's audio ARMED"); // Debug Log
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
   } else if (rickrollPhrases.has(normalizedValue)) {
     otherSecretAudioArmed = true;
-    console.log("Rickroll audio ARMED"); // Debug Log
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
   } else {
-    console.log("Code not recognized."); // Debug Log
     codeModalStatus.textContent = "Invalid code. Try again.";
     return;
   }
 
-  window.setTimeout(() => { codeModal.hidden = true; }, 180);
-});
-
-brandLink.addEventListener("click", (event) => {
-  event.preventDefault();
-  console.log("Logo clicked! Checking armed status...", { secretAudioArmed, otherSecretAudioArmed }); // Debug Log
-
-  let trackToPlay = arbysAudio;
-
-  if (secretAudioArmed) {
-    trackToPlay = arbysRareAudio;
-  } else if (otherSecretAudioArmed) {
-    trackToPlay = rickrollAudio;
-  }
-
-  console.log("Selected track to play:", trackToPlay); // Debug Log
-
-  [arbysAudio, arbysRareAudio, rickrollAudio].forEach(audio => {
-    if (audio) {
-      audio.pause();
-      audio.currentTime = 0;
-    }
-  });
-
-  if (trackToPlay) {
-    trackToPlay.play()
-      .then(() => console.log("Audio playing successfully!"))
-      .catch(err => console.error("Playback failed error:", err));
-  }
-
-  secretAudioArmed = false;
-  otherSecretAudioArmed = false;
+  window.setTimeout(() => {
+    codeModal.hidden = true;
+  }, 180);
 });
 
 codeModal.addEventListener("click", (event) => {
@@ -187,6 +124,7 @@ codeModal.addEventListener("click", (event) => {
   }
 });
 
+// 6. Menu / Rotator / UI Interactivity
 surpriseButton.addEventListener("click", () => {
   const randomItemIndex = Math.floor(Math.random() * surpriseMenuItems.length);
   const selectedItem = surpriseMenuItems[randomItemIndex];
@@ -211,7 +149,6 @@ themeButton.addEventListener("click", () => {
 
 function renderRotatorDots(activeIndex) {
   rotatorDots.innerHTML = "";
-
   featuredItems.forEach((_, index) => {
     const dot = document.createElement("span");
     if (index === activeIndex) {
@@ -243,8 +180,8 @@ window.setInterval(() => {
 
 renderRotatorDots(currentFeaturedIndex);
 
+// Intersection Observer for Scroll Animations
 const revealItems = document.querySelectorAll(".reveal");
-
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach((entry) => {
@@ -254,9 +191,7 @@ const revealObserver = new IntersectionObserver(
       }
     });
   },
-  {
-    threshold: 0.16
-  }
+  { threshold: 0.16 }
 );
 
 revealItems.forEach((item) => {
