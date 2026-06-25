@@ -144,6 +144,9 @@ codeSearchInput.addEventListener("keydown", (event) => {
   secretAudioArmed = true;
   codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
 
+  otherSecretAudioArmed = true;
+  codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
+
   window.setTimeout(() => {
     codeModal.hidden = true;
   }, 180);
