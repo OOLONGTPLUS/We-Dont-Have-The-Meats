@@ -8,15 +8,18 @@ const rotatorDots = document.getElementById("rotatorDots");
 const brandLink = document.querySelector(".brand-link");
 const arbysAudio = document.getElementById("arbysAudio");
 const arbysRareAudioElement = document.getElementById("arbysRareAudio");
+const rickroll = document.getElementById("rickroll");
 const addCodeButton = document.getElementById("addCodeButton");
 const codeModal = document.getElementById("codeModal");
 const closeCodeModalButton = document.getElementById("closeCodeModalButton");
 const codeSearchInput = document.getElementById("codeSearchInput");
 const codeModalStatus = document.getElementById("codeModalStatus");
 
-const validCodePhrases = new Set(["let's get married", "lets get married"]);
+const validCodePhrases = new Set(["let's get married", "lets get married", "give up"]);
 const rareAudioFileName = "lets-get-married.mp3";
 const arbysRareAudio = new Audio(rareAudioFileName);
+const rickrollAudioFileName = "rickroll.mp3";
+const rickrollAudio = new Audio(rickrollAudioFileName)
 
 const surpriseMenuItems = [
   {
@@ -86,21 +89,31 @@ const featuredItems = [
 
 let currentFeaturedIndex = 0;
 let secretAudioArmed = false;
+let otherSecretAudioArmed = false;
 
 arbysRareAudio.preload = "auto";
 arbysRareAudioElement.removeAttribute("src");
+rickrollAudio.preload  ="auto";
+rickroll.removeAttribute("src");
 
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
 
   const selectedAudio = secretAudioArmed ? arbysRareAudio : arbysAudio;
   const otherAudio = selectedAudio === arbysAudio ? arbysRareAudio : arbysAudio;
+  const AnotherSelectedAudio = otherSecretAudioArmed ? rickrollAudio : arbysAudio;
+  const also_otherAudio = AnotherSelectedAudio === arbysAudio ? rickrollAudio : arbysAudio;
 
   otherAudio.pause();
   otherAudio.currentTime = 0;
+  also_otherAudio.pause();
+  also_otherAudio.currentTime = 0;
   selectedAudio.currentTime = 0;
   selectedAudio.play();
+  AnotherSelectedAudio.currentTime = 0;
+  AnotherSelectedAudio.play()
   secretAudioArmed = false;
+  otherSecretAudioArmed = false;
 });
 
 addCodeButton.addEventListener("click", () => {
