@@ -102,14 +102,19 @@ codeSearchInput.addEventListener("keydown", (event) => {
     .toLowerCase()
     .replace(/[’‘]/g, "'");
 
+  alert("You typed: " + normalizedValue); // <--- FORCE POPUP BOX TO PROVE INPUT WORKS
+
   if (arbySecretPhrases.has(normalizedValue)) {
     secretAudioArmed = true;
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
+    alert("Arby's armed!");
   } else if (rickrollPhrases.has(normalizedValue)) {
     otherSecretAudioArmed = true;
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
+    alert("Rickroll armed!");
   } else {
     codeModalStatus.textContent = "Invalid code. Try again.";
+    alert("Code completely rejected.");
     return;
   }
 
