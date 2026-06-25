@@ -7,8 +7,8 @@ const heroRotatorCard = document.querySelector(".rotator-card");
 const rotatorDots = document.getElementById("rotatorDots");
 const brandLink = document.querySelector(".brand-link");
 const arbysAudio = document.getElementById("arbysAudio");
-const arbysRareAudioElement = document.getElementById("arbysRareAudio");
-const rickroll = document.getElementById("rickroll");
+const arbysRareAudio = document.getElementById("arbysRareAudio");
+const rickrollAudio = document.getElementById("rickroll");
 const addCodeButton = document.getElementById("addCodeButton");
 const codeModal = document.getElementById("codeModal");
 const closeCodeModalButton = document.getElementById("closeCodeModalButton");
@@ -95,7 +95,6 @@ let otherSecretAudioArmed = false;
 arbysRareAudio.preload = "auto";
 arbysRareAudioElement.removeAttribute("src");
 rickrollAudio.preload  ="auto";
-rickroll.removeAttribute("src");
 
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
@@ -111,7 +110,7 @@ brandLink.addEventListener("click", (event) => {
     audio.pause();
     audio.currentTime = 0;
   });
-  
+
   trackToPlay.play();
   secretAudioArmed = false;
   otherSecretAudioArmed = false;
@@ -129,29 +128,57 @@ closeCodeModalButton.addEventListener("click", () => {
 });
 
 codeSearchInput.addEventListener("keydown", (event) => {
-  if (event.key !== "Enter") {
-    return;
-  }
+  if (event.key !== "Enter") return;
 
-  const normalizedValue = codeSearchInput.value
-    .trim()
-    .toLowerCase()
-    .replace(/[’‘]/g, "'");
+  const normalizedValue = codeSearchInput.value.trim().toLowerCase().replace(/[’‘]/g, "'");
+  console.log("Typed code:", normalizedValue); // Debug Log
 
   if (arbySecretPhrases.has(normalizedValue)) {
     secretAudioArmed = true;
+    console.log("Arby's audio ARMED"); // Debug Log
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
   } else if (rickrollPhrases.has(normalizedValue)) {
     otherSecretAudioArmed = true;
+    console.log("Rickroll audio ARMED"); // Debug Log
     codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
   } else {
+    console.log("Code not recognized."); // Debug Log
     codeModalStatus.textContent = "Invalid code. Try again.";
     return;
   }
 
-  window.setTimeout(() => {
-    codeModal.hidden = true;
-  }, 180);
+  window.setTimeout(() => { codeModal.hidden = true; }, 180);
+});
+
+brandLink.addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("Logo clicked! Checking armed status...", { secretAudioArmed, otherSecretAudioArmed }); // Debug Log
+
+  let trackToPlay = arbysAudio;
+
+  if (secretAudioArmed) {
+    trackToPlay = arbysRareAudio;
+  } else if (otherSecretAudioArmed) {
+    trackToPlay = rickrollAudio;
+  }
+
+  console.log("Selected track to play:", trackToPlay); // Debug Log
+
+  [arbysAudio, arbysRareAudio, rickrollAudio].forEach(audio => {
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  });
+
+  if (trackToPlay) {
+    trackToPlay.play()
+      .then(() => console.log("Audio playing successfully!"))
+      .catch(err => console.error("Playback failed error:", err));
+  }
+
+  secretAudioArmed = false;
+  otherSecretAudioArmed = false;
 });
 
 codeModal.addEventListener("click", (event) => {
