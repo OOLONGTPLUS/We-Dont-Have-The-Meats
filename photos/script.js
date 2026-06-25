@@ -15,7 +15,8 @@ const closeCodeModalButton = document.getElementById("closeCodeModalButton");
 const codeSearchInput = document.getElementById("codeSearchInput");
 const codeModalStatus = document.getElementById("codeModalStatus");
 
-const validCodePhrases = new Set(["let's get married", "lets get married", "give up"]);
+const arbySecretPhrases = new Set(["let's get married", "lets get married"]);
+const rickrollPhrases = new Set(["give up"]);
 const rareAudioFileName = "lets-get-married.mp3";
 const arbysRareAudio = new Audio(rareAudioFileName);
 const rickrollAudioFileName = "rickroll.mp3";
@@ -98,20 +99,20 @@ rickroll.removeAttribute("src");
 
 brandLink.addEventListener("click", (event) => {
   event.preventDefault();
+  let trackToPlay = arbysAudio;
+  if (secretAudioArmed) {
+    trackToPlay = arbysRareAudio;
+  } 
+  else if (otherSecretAudioArmed) {
+    trackToPlay = rickrollAudio;
+  }
 
-  const selectedAudio = secretAudioArmed ? arbysRareAudio : arbysAudio;
-  const otherAudio = selectedAudio === arbysAudio ? arbysRareAudio : arbysAudio;
-  const AnotherSelectedAudio = otherSecretAudioArmed ? rickrollAudio : arbysAudio;
-  const also_otherAudio = AnotherSelectedAudio === arbysAudio ? rickrollAudio : arbysAudio;
-
-  otherAudio.pause();
-  otherAudio.currentTime = 0;
-  also_otherAudio.pause();
-  also_otherAudio.currentTime = 0;
-  selectedAudio.currentTime = 0;
-  selectedAudio.play();
-  AnotherSelectedAudio.currentTime = 0;
-  AnotherSelectedAudio.play()
+  [arbysAudio, arbysRareAudio, rickrollAudio].forEach(audio => {
+    audio.pause();
+    audio.currentTime = 0;
+  });
+  
+  trackToPlay.play();
   secretAudioArmed = false;
   otherSecretAudioArmed = false;
 });
@@ -137,15 +138,16 @@ codeSearchInput.addEventListener("keydown", (event) => {
     .toLowerCase()
     .replace(/[’‘]/g, "'");
 
-  if (!validCodePhrases.has(normalizedValue)) {
+  if (arbySecretPhrases.has(normalizedValue)) {
+    secretAudioArmed = true;
+    codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
+  } else if (rickrollPhrases.has(normalizedValue)) {
+    otherSecretAudioArmed = true;
+    codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
+  } else {
+    codeModalStatus.textContent = "Invalid code. Try again.";
     return;
   }
-
-  secretAudioArmed = true;
-  codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
-
-  otherSecretAudioArmed = true;
-  codeModalStatus.textContent = "Code accepted. Click the Arby's logo.";
 
   window.setTimeout(() => {
     codeModal.hidden = true;
